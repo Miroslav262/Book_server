@@ -1,5 +1,6 @@
 package server.books_server.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import server.books_server.entities.Quote;
 import server.books_server.records.CreateQuoteRequest;
@@ -21,6 +22,7 @@ public class QuoteService {
                 .filter(q -> q.getBookId().equals(bookId))
                 .toList();
     }
+
 
     public Quote addQuote(Long bookId, Long userId, CreateQuoteRequest req) {
         Quote q = new Quote();
