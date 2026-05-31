@@ -45,6 +45,23 @@ public class ReviewQuoteController {
                           @RequestBody CreateQuoteRequest req) {
         return quoteService.addQuote(bookId, userId, req);
     }
+    @PostMapping("/quotes/{quoteId}/like")
+    public Quote likeQuote(
+            @PathVariable Long bookId,
+            @PathVariable Long quoteId,
+            @RequestHeader("X-User-Id") Long userId
+    ) {
+        return quoteService.likeQuote(bookId, quoteId, userId);
+    }
+
+    @PostMapping("/quotes/{quoteId}/dislike")
+    public Quote dislikeQuote(
+            @PathVariable Long bookId,
+            @PathVariable Long quoteId,
+            @RequestHeader("X-User-Id") Long userId
+    ) {
+        return quoteService.dislikeQuote(bookId, quoteId, userId);
+    }
 
 }
 

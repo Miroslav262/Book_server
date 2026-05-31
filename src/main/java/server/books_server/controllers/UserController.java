@@ -3,6 +3,7 @@ package server.books_server.controllers;
 import org.springframework.web.bind.annotation.*;
 import server.books_server.entities.Book;
 import server.books_server.entities.User;
+import server.books_server.records.UserResponse;
 import server.books_server.service.UserService;
 import server.books_server.storage.BookStorage;
 
@@ -21,9 +22,16 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public UserResponse getUser(@PathVariable Long id) {
+        User u = userService.getUserById(id);
+
+        return new UserResponse(
+                u.getId(),
+                u.getUsername(),
+                "http://localhost:3000/avatars/" + u.getId()
+        );
     }
+
 
     @PutMapping("/{id}")
     public User updateUser(
