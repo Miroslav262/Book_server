@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import server.books_server.entities.Review;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -35,67 +36,82 @@ public class ReviewStorage {
 
         Review r1 = new Review();
         r1.setBookId(1L);
-        r1.setUserId(21L);
+        r1.setUserId(1L);
         r1.setText("Книга читается легко, сюжет держит внимание до самого конца. Особенно понравилась атмосфера.");
+        r1.setRating(8);
         r1.setLikes(5);
         r1.setDislikes(0);
+        r1.setCreatedAt(LocalDateTime.now().minusDays(5));
         this.save(r1);
 
         Review r2 = new Review();
         r2.setBookId(1L);
-        r2.setUserId(22L);
+        r2.setUserId(3L);
         r2.setText("Хорошая работа автора. Есть моменты, которые хотелось бы раскрыть глубже, но в целом впечатление положительное.");
+        r2.setRating(7);
         r2.setLikes(2);
         r2.setDislikes(1);
+        r2.setCreatedAt(LocalDateTime.now().minusDays(3));
         this.save(r2);
 
         Review r3 = new Review();
         r3.setBookId(2L);
-        r3.setUserId(23L);
+        r3.setUserId(2L);
         r3.setText("Сильная книга. Заставляет задуматься о вещах, которые обычно не замечаешь в повседневной жизни.");
+        r3.setRating(9);
         r3.setLikes(12);
         r3.setDislikes(0);
+        r3.setCreatedAt(LocalDateTime.now().minusDays(10));
         this.save(r3);
 
         Review r4 = new Review();
         r4.setBookId(2L);
-        r4.setUserId(24L);
+        r4.setUserId(1L);
         r4.setText("Местами тяжёлая, но очень глубокая. Определённо стоит прочитать хотя бы раз.");
+        r4.setRating(8);
         r4.setLikes(7);
         r4.setDislikes(1);
+        r4.setCreatedAt(LocalDateTime.now().minusDays(1));
         this.save(r4);
 
         Review r5 = new Review();
         r5.setBookId(2L);
-        r5.setUserId(25L);
+        r5.setUserId(2L);
         r5.setText("Приятный стиль, интересные персонажи. Но концовка показалась немного поспешной.");
+        r5.setRating(6);
         r5.setLikes(3);
         r5.setDislikes(2);
+        r5.setCreatedAt(LocalDateTime.now().minusHours(12));
         this.save(r5);
 
         Review r6 = new Review();
         r6.setBookId(1L);
-        r6.setUserId(26L);
+        r6.setUserId(2L);
         r6.setText("Хорошая книга для спокойного вечера. Не шедевр, но оставляет тёплое ощущение.");
+        r6.setRating(7);
         r6.setLikes(4);
         r6.setDislikes(0);
+        r6.setCreatedAt(LocalDateTime.now().minusDays(2));
         this.save(r6);
 
         Review r7 = new Review();
         r7.setBookId(1L);
-        r7.setUserId(27L);
+        r7.setUserId(3L);
         r7.setText("Очень мотивирующая книга. После прочтения хочется действовать и менять свою жизнь.");
+        r7.setRating(9);
         r7.setLikes(15);
         r7.setDislikes(1);
+        r7.setCreatedAt(LocalDateTime.now().minusDays(7));
         this.save(r7);
 
         Review r8 = new Review();
         r8.setBookId(2L);
-        r8.setUserId(28L);
+        r8.setUserId(2L);
         r8.setText("Хорошая подача материала, много практических мыслей. Рекомендую.");
+        r8.setRating(8);
         r8.setLikes(9);
         r8.setDislikes(0);
+        r8.setCreatedAt(LocalDateTime.now().minusDays(4));
         this.save(r8);
     }
-
 }

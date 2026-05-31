@@ -28,12 +28,31 @@ public class ReviewQuoteController {
     }
 
     @PostMapping("/reviews")
-    public Review addReview(@PathVariable Long bookId,
-                            @RequestHeader("X-User-Id") Long userId,
-                            @RequestBody CreateReviewRequest req) {
+    public Review addReview(
+            @PathVariable Long bookId,
+            @RequestHeader("X-User-Id") Long userId,
+            @RequestBody CreateReviewRequest req
+    ) {
         return reviewService.addReview(bookId, userId, req);
     }
 
+    @PostMapping("/reviews/{reviewId}/like")
+    public Review likeReview(
+            @PathVariable Long bookId,
+            @PathVariable Long reviewId,
+            @RequestHeader("X-User-Id") Long userId
+    ) {
+        return reviewService.likeReview(bookId, reviewId, userId);
+    }
+
+    @PostMapping("/reviews/{reviewId}/dislike")
+    public Review dislikeReview(
+            @PathVariable Long bookId,
+            @PathVariable Long reviewId,
+            @RequestHeader("X-User-Id") Long userId
+    ) {
+        return reviewService.dislikeReview(bookId, reviewId, userId);
+    }
     @GetMapping("/quotes")
     public List<Quote> getQuotes(@PathVariable Long bookId) {
         return quoteService.getQuotes(bookId);
