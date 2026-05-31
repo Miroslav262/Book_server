@@ -18,20 +18,26 @@ public class AvatarController {
     }
 
     @PostMapping("/{userId}")
-    public String uploadAvatar(
+    public ResponseEntity<?> uploadAvatar(
             @PathVariable Long userId,
+            @RequestHeader("X-User-Id") Long headerId,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
 
+        if (!userId.equals(headerId)) {
+            return ResponseEntity.status(403).body("Access denied");
+        }
+
         if (file.isEmpty()) {
-            throw new RuntimeException("Empty file");
+            return ResponseEntity.badRequest().body("Empty file");
         }
 
         byte[] data = file.getBytes();
         userService.updateAvatarBytes(userId, data);
 
-        return "ok";
+        return ResponseEntity.ok("ok");
     }
+
 
     @GetMapping("/{userId}")
     public ResponseEntity<byte[]> getAvatar(@PathVariable Long userId) {

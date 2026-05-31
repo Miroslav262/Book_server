@@ -1,5 +1,6 @@
 package server.books_server.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import server.books_server.entities.Book;
 import server.books_server.entities.User;
@@ -28,18 +29,27 @@ public class UserController {
         return new UserResponse(
                 u.getId(),
                 u.getUsername(),
+                u.getEmail(),
+                u.getBio(),
                 "http://localhost:3000/avatars/" + u.getId()
         );
     }
 
 
+
     @PutMapping("/{id}")
-    public User updateUser(
+    public ResponseEntity<?> updateUser(
             @PathVariable Long id,
+            @RequestHeader("X-User-Id") Long userId,
             @RequestBody User updated
     ) {
-        return userService.updateUser(id, updated);
+        if (!id.equals(userId)) {
+            return ResponseEntity.status(403).body("Access denied");
+        }
+
+        return ResponseEntity.ok(userService.updateUser(id, updated));
     }
+
     @GetMapping("/{id}/books")
     public List<Book> getUserBooks(@PathVariable Long id) {
         return bookStorage.findByOwner(id);
